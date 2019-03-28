@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\VSProjetcs\\repos\\MTUSI\\WebApp\\WebApp.csproj": {}
+    "D:\\MTUSI\\C#\\WebApp\\WebApp.csproj": {}
   },
   "projects": {
-    "D:\\VSProjetcs\\repos\\MTUSI\\DAL\\DAL.csproj": {
+    "D:\\MTUSI\\C#\\DAL\\DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\VSProjetcs\\repos\\MTUSI\\DAL\\DAL.csproj",
+        "projectUniqueName": "D:\\MTUSI\\C#\\DAL\\DAL.csproj",
         "projectName": "DAL",
-        "projectPath": "D:\\VSProjetcs\\repos\\MTUSI\\DAL\\DAL.csproj",
+        "projectPath": "D:\\MTUSI\\C#\\DAL\\DAL.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "D:\\VSProjetcs\\repos\\MTUSI\\DAL\\obj\\",
+        "outputPath": "D:\\MTUSI\\C#\\DAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Xamarin\\NuGet\\",
@@ -86,14 +86,14 @@
         }
       }
     },
-    "D:\\VSProjetcs\\repos\\MTUSI\\WebApp\\WebApp.csproj": {
+    "D:\\MTUSI\\C#\\WebApp\\WebApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\VSProjetcs\\repos\\MTUSI\\WebApp\\WebApp.csproj",
+        "projectUniqueName": "D:\\MTUSI\\C#\\WebApp\\WebApp.csproj",
         "projectName": "WebApp",
-        "projectPath": "D:\\VSProjetcs\\repos\\MTUSI\\WebApp\\WebApp.csproj",
+        "projectPath": "D:\\MTUSI\\C#\\WebApp\\WebApp.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "D:\\VSProjetcs\\repos\\MTUSI\\WebApp\\obj\\",
+        "outputPath": "D:\\MTUSI\\C#\\WebApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Xamarin\\NuGet\\",
@@ -118,8 +118,8 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "D:\\VSProjetcs\\repos\\MTUSI\\DAL\\DAL.csproj": {
-                "projectPath": "D:\\VSProjetcs\\repos\\MTUSI\\DAL\\DAL.csproj"
+              "D:\\MTUSI\\C#\\DAL\\DAL.csproj": {
+                "projectPath": "D:\\MTUSI\\C#\\DAL\\DAL.csproj"
               }
             }
           }

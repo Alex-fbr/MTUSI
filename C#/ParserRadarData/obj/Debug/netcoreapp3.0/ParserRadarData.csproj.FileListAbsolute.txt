@@ -22,3 +22,15 @@ D:\VSProjetcs\repos\MTUSI\ParserRadarData\obj\Debug\netcoreapp3.0\ParserRadarDat
 D:\VSProjetcs\repos\MTUSI\ParserRadarData\obj\Debug\netcoreapp3.0\ParserRadarData.dll
 D:\VSProjetcs\repos\MTUSI\ParserRadarData\obj\Debug\netcoreapp3.0\ParserRadarData.pdb
 D:\VSProjetcs\repos\MTUSI\ParserRadarData\obj\Debug\netcoreapp3.0\ParserRadarData.csprojAssemblyReference.cache
+D:\MTUSI\C#\ParserRadarData\bin\Debug\netcoreapp3.0\ParserRadarData.exe
+D:\MTUSI\C#\ParserRadarData\bin\Debug\netcoreapp3.0\ParserRadarData.deps.json
+D:\MTUSI\C#\ParserRadarData\bin\Debug\netcoreapp3.0\ParserRadarData.runtimeconfig.json
+D:\MTUSI\C#\ParserRadarData\bin\Debug\netcoreapp3.0\ParserRadarData.runtimeconfig.dev.json
+D:\MTUSI\C#\ParserRadarData\bin\Debug\netcoreapp3.0\ParserRadarData.dll
+D:\MTUSI\C#\ParserRadarData\bin\Debug\netcoreapp3.0\ParserRadarData.pdb
+D:\MTUSI\C#\ParserRadarData\obj\Debug\netcoreapp3.0\ParserRadarData.csprojAssemblyReference.cache
+D:\MTUSI\C#\ParserRadarData\obj\Debug\netcoreapp3.0\ParserRadarData.csproj.CoreCompileInputs.cache
+D:\MTUSI\C#\ParserRadarData\obj\Debug\netcoreapp3.0\ParserRadarData.AssemblyInfoInputs.cache
+D:\MTUSI\C#\ParserRadarData\obj\Debug\netcoreapp3.0\ParserRadarData.AssemblyInfo.cs
+D:\MTUSI\C#\ParserRadarData\obj\Debug\netcoreapp3.0\ParserRadarData.dll
+D:\MTUSI\C#\ParserRadarData\obj\Debug\netcoreapp3.0\ParserRadarData.pdb

@@ -11,6 +11,10 @@ namespace DataMining.DAL.Repositories
     {
         Car GetById(int id);
         Task<Car> GetByIdAsync(int id);
+        Task<Car> GetByNameAndDateAsync(string name, DateTime date);
+
         IEnumerable<Car> Cars { get;}
+
+       
     }
 }

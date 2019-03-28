@@ -18,7 +18,12 @@ namespace WebApp.Services.Implementation
         {
             foreach (var item in data)
             {
-                await _carRepository.InsertAsync(item);
+                var car = await _carRepository.GetByNameAndDateAsync(item.Name, item.Date);
+                if (car == null && item.Name != null && item.Date != null)
+                {
+                    await _carRepository.InsertAsync(item);
+                }
+                 
             }
         }
     }

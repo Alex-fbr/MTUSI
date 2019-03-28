@@ -8,7 +8,7 @@ namespace DataMining.DAL.Entities
     [Table("Cars", Schema = "dbo")]
     public class Car
     {
-        public long Id { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// номер полосы;

@@ -25,14 +25,17 @@ namespace DataMining.DAL.Repositories.Implementation
 
         public Car GetById(int id)
         {
-            throw new NotImplementedException();
+            return  DbSet.SingleOrDefault(x => x.Id == id);
         }
 
-        public Task<Car> GetByIdAsync(int id)
+        public async Task<Car> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await DbSet.SingleOrDefaultAsync(x => x.Id == id);
         }
 
-       
+        public async Task<Car> GetByNameAndDateAsync(string name, DateTime date)
+        {
+            return await DbSet.FirstOrDefaultAsync(x => x.Date == date && x.Name == name);
         }
+    }
 }

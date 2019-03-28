@@ -35,11 +35,8 @@ namespace WebApp
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-           
-            var interfaceName = nameof(IDataManager);
-            var interfaceType = typeof(IDataManager);
-            services.Add(new ServiceDescriptor(interfaceType, typeof(DataManager),ServiceLifetime.Transient));
             services.RegisterCarDbContext(Configuration);
+            services.AddTransient<IDataManager, DataManager>();
             services.AddScoped<ICarRepository, CarRepository>();
             services.AddMvc().AddNewtonsoftJson();
         }

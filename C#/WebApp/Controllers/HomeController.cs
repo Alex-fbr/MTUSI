@@ -25,7 +25,7 @@ namespace WebApp.Controllers
 
         public async Task<IActionResult> Parse()
         {
-           var data = Parser.ParseFromFile("D:\\Данные по диплому\\logdet07-11-11.log");
+           var data = Parser.ParseFromFile("D:\\Данные по диплому\\logdet13-08-11.log");
            await _dataManager.UpdateDataBase(data);
            return Ok();
         }

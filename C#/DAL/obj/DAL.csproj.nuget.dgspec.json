@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\VSProjetcs\\repos\\MTUSI\\DAL\\DAL.csproj": {}
+    "D:\\MTUSI\\C#\\DAL\\DAL.csproj": {}
   },
   "projects": {
-    "D:\\VSProjetcs\\repos\\MTUSI\\DAL\\DAL.csproj": {
+    "D:\\MTUSI\\C#\\DAL\\DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\VSProjetcs\\repos\\MTUSI\\DAL\\DAL.csproj",
+        "projectUniqueName": "D:\\MTUSI\\C#\\DAL\\DAL.csproj",
         "projectName": "DAL",
-        "projectPath": "D:\\VSProjetcs\\repos\\MTUSI\\DAL\\DAL.csproj",
+        "projectPath": "D:\\MTUSI\\C#\\DAL\\DAL.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "D:\\VSProjetcs\\repos\\MTUSI\\DAL\\obj\\",
+        "outputPath": "D:\\MTUSI\\C#\\DAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Xamarin\\NuGet\\",

@@ -11,7 +11,7 @@ namespace DataMining.DAL
     {
         public static void RegisterCarDbContext(this IServiceCollection services, IConfiguration configuration)
         {
-            services.RegisterDbContext<ICarDbContext, CarDbContext>(() => configuration.GetConnectionString("CarDB"));
+            services.RegisterDbContext<ICarDbContext, CarDbContext>(() => configuration.GetConnectionString("MTUSIDB"));
         }
 
     }
