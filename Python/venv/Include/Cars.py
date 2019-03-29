@@ -14,6 +14,7 @@ import sklearn
 print("версия scikit-learn: {}".format(sklearn.__version__))
 import mglearn
 print("версия mglearn: {}".format(mglearn.__version__))
+import matplotlib.pyplot as plt
 
 import csv
 def csv_reader(file_obj):
@@ -31,7 +32,7 @@ def csv_reader(file_obj):
 
 
 if __name__ == "__main__":
-    csv_path = "D:\YandexDisk\МТУСИ\Диссертация\Данные по диплому\data.csv"
+    csv_path = "D:\dat.csv"
     with open(csv_path, "r") as f_obj:
         csv_reader(f_obj)
 
@@ -51,9 +52,35 @@ import matplotlib.pyplot as plt
 # plot dataset
 plt.plot(X, y, 'o')
 plt.ylim(0, 150)
-plt.xlabel("Дистанция, м")
-plt.ylabel("Скорость, км/ч")
-plt.show()
+plt.xlabel("Скорость, км/ч")
+plt.ylabel("Дистанция, м")
+#plt.show()
 plt.close()
+
+
+
+
+from sklearn.datasets import make_blobs
+from sklearn.cluster import KMeans
+
+# строим модель кластеризации
+kmeans = KMeans(n_clusters=10)
+kmeans.fit(dataset)
+points = kmeans.labels_
+print("Принадлежность к кластерам:\n{}".format(points))
+
+from collections import Counter
+c = Counter(points)
+print("Всего точек:\n{}".format(points.size))
+print("Принадлежность к кластерам:\n{}".format(c))
+
+mglearn.discrete_scatter(dataset[:, 0], dataset[:, 1], kmeans.labels_, markers='o')
+mglearn.discrete_scatter( kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], [0, 1, 2,3,4,5,6,7,8,9], markers='^', markeredgewidth=5)
+plt.legend(["кластер 1", "кластер 2","кластер 3","кластер 4","кластер 5","кластер 6","кластер 7",
+            "кластер 8","кластер 9","кластер 10"], loc='best')
+plt.xlabel("Скорость, км/ч")
+plt.ylabel("Дистанция, м")
+plt.show()
+print("График")
 
 
