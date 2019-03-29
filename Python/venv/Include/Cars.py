@@ -82,5 +82,41 @@ plt.xlabel("Скорость, км/ч")
 plt.ylabel("Дистанция, м")
 plt.show()
 print("График")
+plt.close()
 
+
+plt.show()
+from sklearn.cluster import AgglomerativeClustering
+agg = AgglomerativeClustering(n_clusters=10)
+assignment = agg.fit_predict(dataset)
+mglearn.discrete_scatter(dataset[:, 0], dataset[:, 1], assignment)
+plt.legend(["кластер 1", "кластер 2","кластер 3","кластер 4","кластер 5","кластер 6","кластер 7",
+            "кластер 8","кластер 9","кластер 10"], loc='best')
+plt.xlabel("Скорость, км/ч")
+plt.ylabel("Дистанция, м")
+plt.show()
+print("График")
+
+
+
+
+
+# импортируем функцию dendrogram и функцию кластеризации ward из SciPy
+from scipy.cluster.hierarchy import dendrogram, ward
+# применяем кластеризацию ward к массиву данных dataset
+# функция SciPy ward возвращает массив с расстояниями
+# вычисленными в ходе выполнения агломеративной кластеризации
+linkage_array = ward(dataset)
+# теперь строим дендрограмму для массива связей, содержащего расстояния
+# между кластерами
+dendrogram(linkage_array)
+# делаем отметки на дереве, соответствующие двум или трем кластерам
+ax = plt.gca()
+bounds = ax.get_xbound()
+ax.plot(bounds, [7.25, 7.25], '--', c='k')
+ax.plot(bounds, [4, 4], '--', c='k')
+ax.text(bounds[1], 7.25, ' два кластера', va='center', fontdict={'size': 15})
+ax.text(bounds[1], 4, ' три кластера', va='center', fontdict={'size': 15})
+plt.xlabel("Индекс наблюдения")
+plt.ylabel("Кластерное расстояние")
 
