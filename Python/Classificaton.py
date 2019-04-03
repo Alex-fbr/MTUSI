@@ -204,7 +204,7 @@ plt.close()
 
 
 # !!!!!! Многие линейные модели классификации предназначены лишь для
-# бинарной классификации и не распространяются на случай # мультиклассовой классификации
+# бинарной классификации и не распространяются на случай мультиклассовой классификации
 # (за исключением логистической регрессии).
 
 from sklearn.datasets import make_blobs
@@ -308,3 +308,168 @@ print("Частоты признаков:\n{}".format(counts))
 текста. MultinomialNB обычно работает лучше, чем BernoulliNB, особенно
 на наборах данных с относительно большим количеством признаков,
 имеющих ненулевые частоты (т.е. на больших документах)."""
+
+
+
+
+#----------------------- Ядерный метод опорных векторов --------------------------------
+
+X, y = make_blobs(centers=4, random_state=8)
+y = y % 2
+mglearn.discrete_scatter(X[:, 0], X[:, 1], y)
+plt.xlabel("Признак 0")
+plt.ylabel("Признак 1")
+
+from sklearn.svm import LinearSVC
+linear_svm = LinearSVC().fit(X, y)
+mglearn.plots.plot_2d_separator(linear_svm, X)
+mglearn.discrete_scatter(X[:, 0], X[:, 1], y)
+plt.xlabel("Признак 0")
+plt.ylabel("Признак 1")
+
+"""Линейная модель классификации может отделить точки только с
+помощью прямой линии и не может дать хорошее качество для этого
+набора данных"""
+
+
+# добавляем второй признак, возведенный в квадрат
+X_new = np.hstack([X, X[:, 1:] ** 2])
+from mpl_toolkits.mplot3d import Axes3D, axes3d
+figure = plt.figure()
+# визуализируем в 3D
+ax = Axes3D(figure, elev=-152, azim=-26)
+# сначала размещаем на графике все точки с y == 0, затем с y == 1
+mask = y == 0
+ax.scatter(X_new[mask, 0], X_new[mask, 1], X_new[mask, 2], c='b',
+cmap=mglearn.cm2, s=60)
+ax.scatter(X_new[~mask, 0], X_new[~mask, 1], X_new[~mask, 2], c='r', marker='^',
+cmap=mglearn.cm2, s=60)
+ax.set_xlabel("признак0")
+ax.set_ylabel("признак1")
+ax.set_zlabel("признак1 ** 2")
+
+plt.close()
+
+linear_svm_3d = LinearSVC().fit(X_new, y)
+coef, intercept = linear_svm_3d.coef_.ravel(), linear_svm_3d.intercept_
+# показать границу принятия решений линейной модели
+figure = plt.figure()
+ax = Axes3D(figure, elev=-152, azim=-26)
+xx = np.linspace(X_new[:, 0].min() - 2, X_new[:, 0].max() + 2, 50)
+yy = np.linspace(X_new[:, 1].min() - 2, X_new[:, 1].max() + 2, 50)
+XX, YY = np.meshgrid(xx, yy)
+ZZ = (coef[0] * XX + coef[1] * YY + intercept) / -coef[2]
+ax.plot_surface(XX, YY, ZZ, rstride=8, cstride=8, alpha=0.3)
+ax.scatter(X_new[mask, 0], X_new[mask, 1], X_new[mask, 2], c='b',
+cmap=mglearn.cm2, s=60)
+ax.scatter(X_new[~mask, 0], X_new[~mask, 1], X_new[~mask, 2], c='r', marker='^',
+cmap=mglearn.cm2, s=60)
+ax.set_xlabel("признак0")
+ax.set_ylabel("признак1")
+ax.set_zlabel("признак1 ** 2")
+
+
+ZZ = YY ** 2
+dec = linear_svm_3d.decision_function(np.c_[XX.ravel(), YY.ravel(), ZZ.ravel()])
+plt.contourf(XX, YY, dec.reshape(XX.shape), levels=[dec.min(), 0, dec.max()],
+cmap=mglearn.cm2, alpha=0.5)
+mglearn.discrete_scatter(X[:, 0], X[:, 1], y)
+plt.xlabel("Признак 0")
+plt.ylabel("Признак 1")
+
+
+
+"""Из вышесказанного можно сделать вывод, что добавление нелинейных
+признаков может улучшить прогнозную силу линейной модели. Однако
+часто мы не знаем, какие признаки необходимо добавить, и добавление
+большего числа признаков (например, рассмотрение всех возможных
+взаимодействий в 100-мерном пространстве признаков) может очень
+сильно увеличить стоимость вычислений. К счастью, есть хитрый
+математический трюк, который позволяет нам обучить классификатор в
+многомерном пространстве, фактически не прибегая к вычислению
+нового, возможно, очень высокоразмерного пространства. Этот трюк
+известен под названием «ядерный трюк» (kernel trick) и он
+непосредственно вычисляет евклидовы расстояния (более точно,
+скалярные произведения точек данных), чтобы получить расширенное
+пространство признаков без фактического добавления новых признаков."""
+
+from sklearn.svm import SVC
+X, y = mglearn.tools.make_handcrafted_dataset()
+svm = SVC(kernel='rbf', C=10, gamma=0.1).fit(X, y)
+mglearn.plots.plot_2d_separator(svm, X, eps=.5)
+mglearn.discrete_scatter(X[:, 0], X[:, 1], y)
+# размещаем на графике опорные векторы
+sv = svm.support_vectors_
+# метки классов опорных векторов определяются знаком дуальных коэффициентов
+sv_labels = svm.dual_coef_.ravel() > 0
+mglearn.discrete_scatter(sv[:, 0], sv[:, 1], sv_labels, s=15, markeredgewidth=3)
+plt.xlabel("Признак 0")
+plt.ylabel("Признак 1")
+
+
+# Настройка параметров
+fig, axes = plt.subplots(3, 3, figsize=(15, 10))
+for ax, C in zip(axes, [-1, 0, 3]):
+    for a, gamma in zip(ax, range(-1, 2)):
+        mglearn.plots.plot_svm(log_C=C, log_gamma=gamma, ax=a)
+axes[0, 0].legend(["class 0", "class 1", "sv class 0", "sv class 1"],ncol=4, loc=(.9, 1.2))
+
+
+
+
+X_train, X_test, y_train, y_test = train_test_split(
+cancer.data, cancer.target, random_state=0)
+svc = SVC()
+svc.fit(X_train, y_train)
+print("Правильность на обучающем наборе: {:.2f}".format(svc.score(X_train, y_train)))
+print("Правильность на тестовом наборе: {:.2f}".format(svc.score(X_test, y_test)))
+
+plt.plot(X_train.min(axis=0), 'o', label="min")
+plt.plot(X_train.max(axis=0), '^', label="max")
+plt.legend(loc=4)
+plt.xlabel("Индекс признака")
+plt.ylabel("Величина признака")
+plt.yscale("log")
+
+"""
+Один из способов решения этой проблемы – масштабирование всех
+признаков таким образом, чтобы все они имели примерно один и тот же
+масштаб. Общераспространенный метод масштабирования для ядерного
+SVM заключается в масштабировании данных так, чтобы все признаки
+принимали значения от 0 до 1. Мы увидим, как это делается с помощью
+метода предварительной обработки MinMaxScaler в главе 3, в которой
+дадим более подробную информацию. А сейчас давайте сделаем это
+«вручную»:
+"""
+# вычисляем минимальное значение для каждого признака обучающего набора
+min_on_training = X_train.min(axis=0)
+# вычисляем ширину диапазона для каждого признака (max - min) обучающего набора
+range_on_training = (X_train - min_on_training).max(axis=0)
+# вычитаем минимальное значение и затем делим на ширину диапазона
+# min=0 и max=1 для каждого признака
+X_train_scaled = (X_train - min_on_training) / range_on_training
+print("Минимальное значение для каждого признака\n{}".format(X_train_scaled.min(axis=0)))
+print("Максимальное значение для каждого признака\n {}".format(X_train_scaled.max(axis=0)))
+
+# используем ТО ЖЕ САМОЕ преобразование для тестового набора,
+# используя минимум и ширину диапазона из обучающего набора (см. главу 3)
+X_test_scaled = (X_test - min_on_training) / range_on_training
+
+svc = SVC()
+svc.fit(X_train_scaled, y_train)
+print("Правильность на обучающем наборе: {:.3f}".format(
+svc.score(X_train_scaled, y_train)))
+print("Правильность на тестовом наборе: {:.3f}".format(svc.score(X_test_scaled, y_test)))
+
+svc = SVC(C=1000)
+svc.fit(X_train_scaled, y_train)
+print("Правильность на обучающем наборе: {:.3f}".format(
+svc.score(X_train_scaled, y_train)))
+print("Правильность на тестовом наборе: {:.3f}".format(svc.score(X_test_scaled, y_test)))
+
+
+
+
+
+
+
