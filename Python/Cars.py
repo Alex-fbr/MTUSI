@@ -78,7 +78,7 @@ def BuildAgglomerativeClustering(dataset):
     print("BuildAgglomerativeClustering")
 #---------------------------------------------------------------------
 
-#------------------------- Модель кластеризации  Agglomerative --------------------
+#------------------------- Модель кластеризации  DBSCAN --------------------
 def BuildDBSCAN(dataset):
     # масштабируем данные так, чтобы получить нулевое среднее и единичную дисперсию
     from sklearn.preprocessing import StandardScaler
@@ -106,7 +106,7 @@ if __name__ == "__main__":
     BuildAgglomerativeClustering(dataset)
     plt.close()
     BuildDBSCAN(dataset)
-    #plt.close()
+    plt.close()
 
 
 
