@@ -98,12 +98,13 @@ from sklearn.cluster import DBSCAN
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import MinMaxScaler
 
-a = dataset[:, 0]
-b = dataset[:, 1]
-X = np.concatenate((a, b), axis=1)
+a = dataset[:2, :]
+b = dataset[:,2 ]
+c = dataset[:,:2]
 
+X = dataset[:,:2]
 # масштабируем данные так, чтобы получить нулевое среднее и единичную дисперсию
-scaler = StandardScaler(),
+scaler = StandardScaler()
 scaler.fit(X)
 X_scaled = scaler.transform(X)
 fig, axes = plt.subplots(1, 4, figsize=(15, 3),subplot_kw={'xticks': (), 'yticks': ()})
