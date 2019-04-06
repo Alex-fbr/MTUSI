@@ -29,10 +29,10 @@ kmeans = KMeans(n_clusters=3)
 kmeans.fit(X)
 print("Принадлежность к кластерам:\n{}".format(kmeans.labels_))
 print(kmeans.predict(X))
-
+print("форма массива X: {}".format(X.shape))
 mglearn.discrete_scatter(X[:, 0], X[:, 1], kmeans.labels_, markers='o')
-mglearn.discrete_scatter(
-kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], [0, 1, 2], markers='^', markeredgewidth=2)
+
+mglearn.discrete_scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], [0, 1, 2], markers='^', markeredgewidth=2)
 fig, axes = plt.subplots(1, 2, figsize=(10, 5))
 
 plt.show()
