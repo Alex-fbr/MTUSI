@@ -98,9 +98,6 @@ from sklearn.cluster import DBSCAN
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import MinMaxScaler
 
-a = dataset[:2, :]
-b = dataset[:,2 ]
-c = dataset[:,:2]
 
 X = dataset[:,:2]
 # масштабируем данные так, чтобы получить нулевое среднее и единичную дисперсию
@@ -108,6 +105,7 @@ scaler = StandardScaler()
 scaler.fit(X)
 X_scaled = scaler.transform(X)
 fig, axes = plt.subplots(1, 4, figsize=(15, 3),subplot_kw={'xticks': (), 'yticks': ()})
+
 # случайно присваиваем точки двум кластерам для сравнения
 random_state = np.random.RandomState(seed=0)
 random_clusters = random_state.randint(low=0, high=2, size=len(X))
@@ -115,12 +113,12 @@ random_clusters = random_state.randint(low=0, high=2, size=len(X))
 axes[0].scatter(X_scaled[:, 0], X_scaled[:, 1], c=random_clusters,cmap=mglearn.cm3, s=60)
 axes[0].set_title("Случайное присвоение кластеров: {:.2f}".format(silhouette_score(X_scaled, random_clusters)))
 
-algorithms = [KMeans(n_clusters=2), AgglomerativeClustering(n_clusters=2),DBSCAN()]
+algorithms = [KMeans(n_clusters=6), AgglomerativeClustering(n_clusters=6),DBSCAN()]
 for ax, algorithm in zip(axes[1:], algorithms):
     clusters = algorithm.fit_predict(X_scaled)
     # выводим на графике принадлежность к кластерам и центры кластеров
     ax.scatter(X_scaled[:, 0], X_scaled[:, 1], c=clusters, cmap=mglearn.cm3,s=60)
     ax.set_title("{} : {:.2f}".format(algorithm.__class__.__name__,
     silhouette_score(X_scaled, clusters)))
-
+plt.show()
 plt.show()
